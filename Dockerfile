@@ -1,12 +1,7 @@
-FROM maven:3.5.3-jdk-10-slim as build
-
-WORKDIR /app
-COPY pom.xml .
-COPY src src
-
 FROM openjdk:10.0.1-10-jre-slim
-
+VOLUME /tmp
 EXPOSE 8080
-ADD target/*.jar app.jar
-ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+ARG JAR_FILE=target/spring-boot-k8s-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} spring-boot-k8s.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-boot-k8s.jar"]
+

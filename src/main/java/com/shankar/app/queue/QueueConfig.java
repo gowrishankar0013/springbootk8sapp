@@ -16,8 +16,7 @@ public class QueueConfig {
 
 	@Bean
 	public ActiveMQConnectionFactory activeMQConnectionFactory() {
-		ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
-		activeMQConnectionFactory.setBrokerURL(brokerUrl);
+		ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("admin","admin","tcp://activemqcontainer:61616");
 		return activeMQConnectionFactory;
 	}
 	
