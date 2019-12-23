@@ -1,0 +1,32 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: activemqcontainer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+      - name: web
+        image: rmohr/activemq
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 61616
+        resources:
+          limits:
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activemqcontainer
+spec:
+  ports:
+  - port: 61616
+    targetPort: 61616
+  selector:
+    app: activemqcontainer

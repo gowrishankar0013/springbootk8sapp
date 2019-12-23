@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: activemqcontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: activemqcontainer
+  template:
+    metadata:
+      labels:
+        app: activemqcontainer
+    spec:
+      containers:
+      - name: web
+        image: shankarregistry.azurecr.io/rmohractivemq
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 61616
+        resources:
+          limits:
+            memory: 512Mi
+      imagePullSecrets:
+        -name: akssecret
