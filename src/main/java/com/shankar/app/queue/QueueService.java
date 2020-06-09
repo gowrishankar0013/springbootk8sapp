@@ -52,7 +52,7 @@ public class QueueService implements MessageListener {
             ActiveMQTextMessage textMessage = (ActiveMQTextMessage) message;
             try {
                 LOGGER.info("Processing task " + textMessage.getText());
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 LOGGER.info("Completed task " + textMessage.getText());
             } catch (InterruptedException e) {
                 e.printStackTrace();
